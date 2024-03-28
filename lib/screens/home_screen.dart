@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:sccapwl_movil/screens/devices_screen.dart';
+import 'package:sccapwl_movil/screens/tanks_screen.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:weather_icons/weather_icons.dart';
 
@@ -14,6 +18,134 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Container(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              ListTile(
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.person),
+                ),
+                title: Text(
+                  'Yahir Durán',
+                  style: AppTheme.lightTheme.textTheme.headlineLarge,
+                ),
+                onTap: () {
+                  null;
+                },
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children:z [
+              //     IconTheme(
+              //       data: AppTheme.lightTheme.iconTheme,
+              //       child: const Icon(Icons.person),
+              //     ),
+              //     Text(
+              //       'Fulanito de tal',
+              //       style: AppTheme.lightTheme.textTheme.headlineLarge,
+              //     )
+              //   ],
+              // ),
+              const Divider(),
+              ListTile(
+                selected: true,
+                selectedTileColor: AppTheme.mediumColorTrans,
+                // selectedColor: AppTheme.mediumColor,
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.home),
+                ),
+                title: Text(
+                  'Pantalla principal',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ),
+                onTap: () {
+                  final rutaHome = MaterialPageRoute(builder: (context) {
+                    return const HomeScreen();
+                  });
+                  Navigator.push(context, rutaHome);
+                },
+              ),
+              ListTile(
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.settings_remote),
+                ),
+                title: Text(
+                  'Mis dispositivos',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ),
+                onTap: () {
+                  final rutaDevices = MaterialPageRoute(builder: (context) {
+                    return const DevicesScreen();
+                  });
+                  Navigator.push(context, rutaDevices);
+                },
+              ),
+              ListTile(
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.invert_colors),
+                ),
+                title: Text(
+                  'Mis depósitos',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ),
+                onTap: () {
+                  final rutaTanks = MaterialPageRoute(builder: (context) {
+                    return const TanksScreen();
+                  });
+                  Navigator.push(context, rutaTanks);
+                },
+              ),
+              ListTile(
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.receipt),
+                ),
+                title: Text(
+                  'Informes',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ),
+                onTap: () {
+                  null;
+                },
+              ),
+              const Divider(),
+              ListTile(
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.exit_to_app),
+                ),
+                title: Text(
+                  'Cerrar sesión',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ),
+                onTap: () {
+                  null;
+                },
+              ),
+              const Divider(),
+              ListTile(
+                leading: IconTheme(
+                  data: AppTheme.lightTheme.iconTheme,
+                  child: const Icon(Icons.link),
+                ),
+                title: Text(
+                  'Ir al sitio web',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ),
+                onTap: () {
+                  null;
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: DropdownButton(
@@ -48,28 +180,33 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
         ),
-        leading: IconButton(
-          color: AppTheme.darkColor,
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            null;
-          },
-        ),
+        // leading: IconButton(
+        //   color: AppTheme.darkColor,
+        //   icon: const Icon(Icons.menu),
+        //   onPressed: () {
+        //     null;
+        //   },
+        // ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             // const GlassWidget(fillLevel: 0.6),
-            SizedBox(
-              height: 450,
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
+              padding: const EdgeInsets.all(10),
+              height: 250,
+              decoration: BoxDecoration(
+                  color: AppTheme.backColor,
+                  borderRadius: BorderRadius.circular(15)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const CircularProgressIndicator(
                     value: 0.8,
-                    backgroundColor: AppTheme.backColor,
-                    color: AppTheme.mediumColor,
+                    backgroundColor: AppTheme.mediumColor,
+                    color: AppTheme.mainColor,
                     strokeWidth: 50,
                     strokeAlign: BorderSide.strokeAlignCenter,
                   ),

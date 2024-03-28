@@ -3,14 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const mainColor = Color(0xFF00A8E8);
-  static const backColor = Colors.white;
+  static const backColor = Color.fromARGB(255, 222, 226, 227);
   static const darkColor = Color.fromARGB(255, 0, 23, 31);
   static const mediumColor = Color(0xFF003459);
+  static const mediumColorTrans = Color.fromARGB(66, 0, 52, 89);
+  static const secColor = Color(0XFF007EA7);
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-      scaffoldBackgroundColor: mainColor,
+      scaffoldBackgroundColor: Colors.white,
       appBarTheme: AppBarTheme(
-          color: mainColor,
+          color: secColor,
           titleTextStyle: GoogleFonts.hindMadurai(
               color: darkColor, fontSize: 28.0, fontWeight: FontWeight.bold)),
       iconTheme: const IconThemeData(
@@ -19,7 +21,7 @@ class AppTheme {
       ),
       cardTheme: const CardTheme(
         color: backColor,
-        elevation: 15,
+        elevation: 10,
       ),
       textTheme: TextTheme(
           headlineLarge: GoogleFonts.hindMadurai(
