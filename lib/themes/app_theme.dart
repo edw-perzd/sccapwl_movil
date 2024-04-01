@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static const mainColor = Color(0xFF00A8E8);
+  static const mainColor = Color.fromARGB(255, 7, 106, 187);
   static const backColor = Color.fromARGB(255, 222, 226, 227);
   static const darkColor = Color.fromARGB(255, 0, 23, 31);
   static const mediumColor = Color(0xFF003459);
@@ -12,7 +12,7 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: AppBarTheme(
-          color: secColor,
+          color: mainColor,
           titleTextStyle: GoogleFonts.hindMadurai(
               color: darkColor, fontSize: 28.0, fontWeight: FontWeight.bold)),
       iconTheme: const IconThemeData(
@@ -25,7 +25,7 @@ class AppTheme {
       ),
       textTheme: TextTheme(
           headlineLarge: GoogleFonts.hindMadurai(
-              color: darkColor, fontSize: 23.0, fontWeight: FontWeight.bold),
+              color: darkColor, fontSize: 25.0, fontWeight: FontWeight.bold),
           headlineMedium: GoogleFonts.hindMadurai(
             color: darkColor,
             fontSize: 20.0,
@@ -34,6 +34,10 @@ class AppTheme {
               color: darkColor, fontSize: 17.0, fontWeight: FontWeight.bold),
           bodySmall: GoogleFonts.hindMadurai(
             color: darkColor,
+            fontSize: 17.0,
+          ),
+          bodyLarge: GoogleFonts.hindMadurai(
+            color: mainColor,
             fontSize: 17.0,
           )));
 }
