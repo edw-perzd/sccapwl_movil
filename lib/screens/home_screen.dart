@@ -190,74 +190,76 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
+        child: ListView(
           children: [
             // const GlassWidget(fillLevel: 0.6),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
-              padding: const EdgeInsets.all(10),
-              height: 250,
-              decoration: BoxDecoration(
-                  color: AppTheme.backColor,
-                  borderRadius: BorderRadius.circular(15)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const CircularProgressIndicator(
-                    value: 0.8,
-                    backgroundColor: AppTheme.mediumColor,
-                    color: AppTheme.mainColor,
-                    strokeWidth: 50,
-                    strokeAlign: BorderSide.strokeAlignCenter,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '80%',
-                        style: AppTheme.lightTheme.textTheme.headlineLarge,
+                margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
+                padding: const EdgeInsets.all(40),
+                height: 250,
+                decoration: BoxDecoration(
+                    color: AppTheme.backColor,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text('80%',
+                                style: AppTheme
+                                    .lightTheme.textTheme.headlineLarge),
+                            Container(
+                                margin: const EdgeInsets.only(left: 20),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      '250 L',
+                                      style: AppTheme
+                                          .lightTheme.textTheme.headlineMedium,
+                                    ),
+                                    Text(
+                                      '1000 L',
+                                      style: AppTheme
+                                          .lightTheme.textTheme.bodyMedium,
+                                    ),
+                                  ],
+                                )),
+                          ],
+                        ),
+                        const CircularProgressIndicator(
+                          backgroundColor: AppTheme.mediumColor,
+                          color: AppTheme.mainColor,
+                          strokeWidth: 40,
+                          value: 0.8,
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        'Última actualización: 08:50 - 31/03/2024',
+                        style: AppTheme.lightTheme.textTheme.bodySmall,
                       ),
-                      Text(
-                        'Última actualización:',
-                        style: AppTheme.lightTheme.textTheme.headlineMedium,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        'Calidad del agua: Buena',
+                        style: AppTheme.lightTheme.textTheme.bodySmall,
                       ),
-                      Text(
-                        '08:50 pm - 18/03/2024',
-                        style: AppTheme.lightTheme.textTheme.headlineMedium,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(height: 100, child: cardTemp()),
-                SizedBox(
-                  height: 100,
-                  child: cardPH(),
-                ),
-                SizedBox(
-                  height: 100,
-                  child: cardTurbidez(),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(height: 100, child: cardTDS()),
-                SizedBox(
-                  height: 100,
-                  child: cardCantAgua(),
-                ),
-                SizedBox(
-                  height: 100,
-                  child: cardEstado(),
-                ),
-              ],
-            ),
+                    ),
+                    // Container(
+                    //   margin: const EdgeInsets.only(top: 10),
+                    //   child: Text(
+                    //     'Calidad del agua: Buena',
+                    //     style: AppTheme.lightTheme.textTheme.bodySmall,
+                    //   ),
+                    // )
+                  ],
+                )),
           ],
         ),
       ),
