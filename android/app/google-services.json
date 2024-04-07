@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "721746651058",
-    "project_id": "waterlight-918c1",
-    "storage_bucket": "waterlight-918c1.appspot.com"
+    "project_number": "50419247622",
+    "project_id": "sccapwl-9fc3d",
+    "storage_bucket": "sccapwl-9fc3d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:721746651058:android:bffaf49d7ee3ba7bf9e6ab",
+        "mobilesdk_app_id": "1:50419247622:android:4365fae12fea70c0af3187",
         "android_client_info": {
           "package_name": "com.example.sccapwl_movil"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA51V-Y4fnmgKVlVJ5lU1irbjY2eSd-tvs"
+          "current_key": "AIzaSyDXL2G9joNwa-60AUsOgEPEuX3hH_KYhto"
         }
       ],
       "services": {

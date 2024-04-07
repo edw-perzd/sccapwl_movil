@@ -47,28 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBhQat_ThJsU670svUsyTSKcp923OZsai8',
-    appId: '1:721746651058:web:4cf082d29f9c2985f9e6ab',
-    messagingSenderId: '721746651058',
-    projectId: 'waterlight-918c1',
-    authDomain: 'waterlight-918c1.firebaseapp.com',
-    storageBucket: 'waterlight-918c1.appspot.com',
+    apiKey: 'AIzaSyDBVSgdW3Sd5eXOgU4Wmym348_ZesCadsc',
+    appId: '1:50419247622:web:8e6ed66471efa1d0af3187',
+    messagingSenderId: '50419247622',
+    projectId: 'sccapwl-9fc3d',
+    authDomain: 'sccapwl-9fc3d.firebaseapp.com',
+    storageBucket: 'sccapwl-9fc3d.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA51V-Y4fnmgKVlVJ5lU1irbjY2eSd-tvs',
-    appId: '1:721746651058:android:bffaf49d7ee3ba7bf9e6ab',
-    messagingSenderId: '721746651058',
-    projectId: 'waterlight-918c1',
-    storageBucket: 'waterlight-918c1.appspot.com',
+    apiKey: 'AIzaSyDXL2G9joNwa-60AUsOgEPEuX3hH_KYhto',
+    appId: '1:50419247622:android:4365fae12fea70c0af3187',
+    messagingSenderId: '50419247622',
+    projectId: 'sccapwl-9fc3d',
+    storageBucket: 'sccapwl-9fc3d.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC_YS2fiVudJHPKU0HJzzpmKZoZU4q77KQ',
-    appId: '1:721746651058:ios:6fc0442f3535cbe4f9e6ab',
-    messagingSenderId: '721746651058',
-    projectId: 'waterlight-918c1',
-    storageBucket: 'waterlight-918c1.appspot.com',
+    apiKey: 'AIzaSyC8-nOoPcINyW5a_BlC7YveFKPvfuuQwek',
+    appId: '1:50419247622:ios:0ef2bcca3b8202c0af3187',
+    messagingSenderId: '50419247622',
+    projectId: 'sccapwl-9fc3d',
+    storageBucket: 'sccapwl-9fc3d.appspot.com',
     iosBundleId: 'com.example.sccapwlMovil',
   );
 }

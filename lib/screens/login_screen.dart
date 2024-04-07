@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sccapwl_movil/screens/forgot_password.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
+import 'package:sccapwl_movil/screens/signup_screen.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:sccapwl_movil/widgets/customized_button.dart';
 import 'package:sccapwl_movil/widgets/customized_textfield.dart';
@@ -25,32 +26,18 @@ class _LoginScreenState extends State<LoginScreen> {
               width: double.infinity,
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: IconButton(
-                            icon: const Icon(Icons.arrow_back_ios_sharp),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            }),
-                      ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text("Hola, bienvenido",
-                          style: AppTheme.lightTheme.textTheme.headlineLarge),
+                          style: AppTheme.lightTheme.textTheme.titleLarge),
                     ),
                     CustomizedTextfield(
                       myController: _emailController,
-                      hintText: "Ingresa tu email",
+                      hintText: "Ingresa tu correo electronico",
                       isPassword: false,
                     ),
                     CustomizedTextfield(
@@ -70,11 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     builder: (context) =>
                                         const ForgotPassword()));
                           },
-                          child: const Text("¿Olvidaste tu contraseña?",
-                              style: TextStyle(
-                                color: Color(0xff6A707C),
-                                fontSize: 15,
-                              )),
+                          child: Text("¿Olvidaste tu contraseña?",
+                              style: AppTheme.lightTheme.textTheme.labelMedium),
                         ),
                       ),
                     ),
@@ -95,16 +79,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Container(
                             height: 1,
-                            width: MediaQuery.of(context).size.height * 0.15,
+                            width: MediaQuery.of(context).size.height * 0.17,
                             color: Colors.grey,
                           ),
                           Text(
                             "Inicia sesión con",
-                            style: AppTheme.lightTheme.textTheme.bodySmall,
+                            style: AppTheme.lightTheme.textTheme.labelSmall,
                           ),
                           Container(
                             height: 1,
-                            width: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.height * 0.17,
                             color: Colors.grey,
                           ),
                         ],
@@ -137,14 +121,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 140,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(48, 8, 8, 8.0),
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("¿No tienes cuenta?",
-                              style: AppTheme.lightTheme.textTheme.bodySmall),
-                          Text("   Registrate",
-                              style: AppTheme.lightTheme.textTheme.bodyLarge),
+                              style: AppTheme.lightTheme.textTheme.labelSmall),
+                          TextButton(
+                              onPressed: () {
+                                final rutaSignUp =
+                                    MaterialPageRoute(builder: (context) {
+                                  return const SignUpScreen();
+                                });
+                                Navigator.push(context, rutaSignUp);
+                              },
+                              child: Text('Registrate',
+                                  style:
+                                      AppTheme.lightTheme.textTheme.labelLarge))
                         ],
                       ),
                     )

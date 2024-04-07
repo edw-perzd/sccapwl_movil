@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
+import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/screens/tanks_screen.dart';
 import 'package:sccapwl_movil/services/firebase_services.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
@@ -17,141 +18,141 @@ class _DevicesScreenState extends State<DevicesScreen> {
     return Scaffold(
       drawer: Drawer(
         child: Container(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            children: [
-              ListTile(
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.person),
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: IconTheme(
+                      data: AppTheme.lightTheme.iconTheme,
+                      child: const IconTheme(
+                          data: IconThemeData(
+                              color: AppTheme.darkColor, size: 25),
+                          child: Icon(Icons.person))),
+                  title: Text(
+                    'Yahir Durán',
+                    style: AppTheme.lightTheme.textTheme.titleSmall,
+                  ),
+                  onTap: () {},
                 ),
-                title: Text(
-                  'Yahir Durán',
-                  style: AppTheme.lightTheme.textTheme.headlineLarge,
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children:z [
+                //     IconTheme(
+                //       data: AppTheme.lightTheme.iconTheme,
+                //       child: const Icon(Icons.person),
+                //     ),
+                //     Text(
+                //       'Fulanito de tal',
+                //       style: AppTheme.lightTheme.textTheme.headlineLarge,
+                //     )
+                //   ],
+                // ),
+                const Divider(),
+                ListTile(
+                  leading: const IconTheme(
+                      data:
+                          IconThemeData(color: AppTheme.mediumColor, size: 25),
+                      child: Icon(Icons.home)),
+                  title: Text(
+                    'Pantalla principal',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    final rutaHome = MaterialPageRoute(builder: (context) {
+                      return const HomeScreen();
+                    });
+                    Navigator.push(context, rutaHome);
+                  },
                 ),
-                onTap: () {
-                  null;
-                },
-              ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children:z [
-              //     IconTheme(
-              //       data: AppTheme.lightTheme.iconTheme,
-              //       child: const Icon(Icons.person),
-              //     ),
-              //     Text(
-              //       'Fulanito de tal',
-              //       style: AppTheme.lightTheme.textTheme.headlineLarge,
-              //     )
-              //   ],
-              // ),
-              const Divider(),
-              ListTile(
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.home),
+                ListTile(
+                  selected: true,
+                  selectedTileColor: AppTheme.mediumColorTrans,
+                  // selectedColor: AppTheme.mediumColor,
+                  leading: const IconTheme(
+                      data:
+                          IconThemeData(color: AppTheme.mediumColor, size: 25),
+                      child: Icon(Icons.settings_remote)),
+                  title: Text(
+                    'Mis dispositivos',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    final rutaDevices = MaterialPageRoute(builder: (context) {
+                      return const DevicesScreen();
+                    });
+                    Navigator.push(context, rutaDevices);
+                  },
                 ),
-                title: Text(
-                  'Pantalla principal',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                ListTile(
+                  leading: const IconTheme(
+                      data:
+                          IconThemeData(color: AppTheme.mediumColor, size: 25),
+                      child: Icon(Icons.invert_colors)),
+                  title: Text(
+                    'Mis depósitos',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    final rutaTanks = MaterialPageRoute(builder: (context) {
+                      return const TanksScreen();
+                    });
+                    Navigator.push(context, rutaTanks);
+                  },
                 ),
-                onTap: () {
-                  final rutaHome = MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
-                  });
-                  Navigator.push(context, rutaHome);
-                },
-              ),
-              ListTile(
-                selected: true,
-                selectedTileColor: AppTheme.mediumColorTrans,
-                // selectedColor: AppTheme.mediumColor,
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.settings_remote),
+                ListTile(
+                  leading: const IconTheme(
+                      data:
+                          IconThemeData(color: AppTheme.mediumColor, size: 25),
+                      child: Icon(Icons.receipt)),
+                  title: Text(
+                    'Informes',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    null;
+                  },
                 ),
-                title: Text(
-                  'Mis dispositivos',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                const Divider(),
+                ListTile(
+                  leading: const IconTheme(
+                      data:
+                          IconThemeData(color: AppTheme.mediumColor, size: 25),
+                      child: Icon(Icons.exit_to_app)),
+                  title: Text(
+                    'Cerrar sesión',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                  onTap: () {
+                    final rutaTanks = MaterialPageRoute(builder: (context) {
+                      return const LoginScreen();
+                    });
+                    Navigator.push(context, rutaTanks);
+                  },
                 ),
-                onTap: () {
-                  final rutaDevices = MaterialPageRoute(builder: (context) {
-                    return const DevicesScreen();
-                  });
-                  Navigator.push(context, rutaDevices);
-                },
-              ),
-              ListTile(
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.invert_colors),
-                ),
-                title: Text(
-                  'Mis depósitos',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium,
-                ),
-                onTap: () {
-                  final rutaTanks = MaterialPageRoute(builder: (context) {
-                    return const TanksScreen();
-                  });
-                  Navigator.push(context, rutaTanks);
-                },
-              ),
-              ListTile(
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.receipt),
-                ),
-                title: Text(
-                  'Informes',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium,
-                ),
-                onTap: () {
-                  null;
-                },
-              ),
-              const Divider(),
-              ListTile(
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.exit_to_app),
-                ),
-                title: Text(
-                  'Cerrar sesión',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium,
-                ),
-                onTap: () {
-                  null;
-                },
-              ),
-              const Divider(),
-              ListTile(
-                leading: IconTheme(
-                  data: AppTheme.lightTheme.iconTheme,
-                  child: const Icon(Icons.link),
-                ),
-                title: Text(
-                  'Ir al sitio web',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium,
-                ),
-                onTap: () {
-                  null;
-                },
-              ),
-            ],
-          ),
-        ),
+                const Divider(),
+                ListTile(
+                    leading: const IconTheme(
+                        data: IconThemeData(
+                            color: AppTheme.mediumColor, size: 25),
+                        child: Icon(Icons.link)),
+                    title: Text(
+                      'Ir al sitio web',
+                      style: AppTheme.lightTheme.textTheme.bodyMedium,
+                    ),
+                    onTap: () {
+                      null;
+                    })
+              ],
+            )),
       ),
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Mis dispositivos',
-          style: AppTheme.lightTheme.textTheme.headlineLarge,
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
+          centerTitle: true,
+          title: Text(
+            'Mis dispositivos',
+            style: AppTheme.lightTheme.textTheme.headlineSmall,
+          )),
+      body: Container(
+        padding: const EdgeInsets.all(10),
         child: FutureBuilder(
             future: getDevices(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -159,40 +160,41 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      // margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                      padding: const EdgeInsets.all(10),
-                      // decoration: BoxDecoration(
-                      //     color: AppTheme.backColor,
-                      //     borderRadius: BorderRadius.circular(10)),
-                      child: ListTile(
-                        leading: IconTheme(
-                            data: AppTheme.lightTheme.iconTheme,
-                            child: const Icon(Icons.settings_remote)),
-                        title: Text(
-                          snapshot.data[index]['nombre_dispositivo'],
-                          style: AppTheme.lightTheme.textTheme.headlineMedium,
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: IconTheme(
+                              data: AppTheme.lightTheme.iconTheme,
+                              child: const IconTheme(
+                                  data: IconThemeData(
+                                      color: AppTheme.mediumColor, size: 25),
+                                  child: Icon(Icons.settings_remote))),
+                          title: Text(
+                            snapshot.data[index]['nombre_dispositivo'],
+                            style: AppTheme.lightTheme.textTheme.bodyLarge,
+                          ),
+                          subtitle: Row(
+                            children: [
+                              Text(
+                                'Estado: ',
+                                style: AppTheme.lightTheme.textTheme.bodySmall,
+                              ),
+                              Text(
+                                snapshot.data?[index]['estado_dispositivo'] ==
+                                        true
+                                    ? 'Encendido'
+                                    : 'Apagado',
+                                style: snapshot.data[index]
+                                            ['estado_dispositivo'] ==
+                                        true
+                                    ? const TextStyle(color: Colors.green)
+                                    : const TextStyle(color: Colors.red),
+                              )
+                            ],
+                          ),
                         ),
-                        subtitle: Row(
-                          children: [
-                            Text(
-                              'Estado: ',
-                              style: AppTheme.lightTheme.textTheme.bodySmall,
-                            ),
-                            Text(
-                              snapshot.data?[index]['estado_dispositivo'] ==
-                                      true
-                                  ? 'Encendido'
-                                  : 'Apagado',
-                              style: snapshot.data[index]
-                                          ['estado_dispositivo'] ==
-                                      true
-                                  ? const TextStyle(color: Colors.green)
-                                  : const TextStyle(color: Colors.red),
-                            )
-                          ],
-                        ),
-                      ),
+                        const Divider()
+                      ],
                     );
                   },
                   // children: [
