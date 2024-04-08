@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
+import 'package:sccapwl_movil/services/firebase_auth.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:sccapwl_movil/widgets/customized_button.dart';
 import 'package:sccapwl_movil/widgets/customized_textfield.dart';
+import 'package:sccapwl_movil/widgets/toast.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -13,6 +17,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  bool isSigningUp = false;
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -50,62 +58,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: "Crea una contraseña",
                 isPassword: true,
               ),
-              CustomizedTextfield(
-                myController: _confirmPasswordController,
-                hintText: "Confirmar contraseña",
-                isPassword: true,
-              ),
               CustomizedButton(
+                stateProcess: isSigningUp,
                 buttonText: "Registrarme",
                 buttonColor: Color.fromARGB(255, 7, 106, 187),
                 textColor: Color.fromARGB(255, 255, 255, 255),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const LoginScreen()));
+                  _signUp();
                 },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.height * 0.16,
-                      color: Colors.grey,
-                    ),
-                    Text(
-                      "Registrate con",
-                      style: AppTheme.lightTheme.textTheme.labelMedium,
-                    ),
-                    Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.height * 0.15,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        height: 50,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: IconButton(
-                          icon: const Icon(
-                            FontAwesomeIcons.google,
-                            color: Color.fromARGB(255, 74, 89, 102),
-                          ),
-                          onPressed: () {},
-                        ))
-                  ],
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -132,5 +92,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       )),
     );
+  }
+
+  void _signUp() async {
+    setState(() {
+      isSigningUp = true;
+    });
+
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    setState(() {
+      isSigningUp = false;
+    });
+    if (user != null) {
+      showToast(message: 'Usuario registrado correctamente');
+      final home = MaterialPageRoute(builder: (context) {
+        return const HomeScreen();
+      });
+      Navigator.push(context, home);
+      showToast(message: 'Usuario creado correctamente');
+    }
   }
 }

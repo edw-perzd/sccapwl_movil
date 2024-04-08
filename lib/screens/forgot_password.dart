@@ -44,6 +44,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               isPassword: false,
             ),
             CustomizedButton(
+              stateProcess: true,
               buttonText: "Enviar código",
               buttonColor: AppTheme.mainColor,
               textColor: Colors.white,

@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sccapwl_movil/screens/forgot_password.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/signup_screen.dart';
+import 'package:sccapwl_movil/services/firebase_auth.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:sccapwl_movil/widgets/customized_button.dart';
 import 'package:sccapwl_movil/widgets/customized_textfield.dart';
+import 'package:sccapwl_movil/widgets/toast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,6 +19,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  bool _isSigning = false;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   @override
@@ -63,14 +71,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     CustomizedButton(
+                      stateProcess: _isSigning,
                       buttonText: "Iniciar Sesión",
                       buttonColor: AppTheme.mainColor,
                       textColor: Colors.white,
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const HomeScreen()));
+                        _signIn();
                       },
                     ),
                     Padding(
@@ -79,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Container(
                             height: 1,
-                            width: MediaQuery.of(context).size.height * 0.17,
+                            width: MediaQuery.of(context).size.height * 0.16,
                             color: Colors.grey,
                           ),
                           Text(
@@ -88,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Container(
                             height: 1,
-                            width: MediaQuery.of(context).size.height * 0.17,
+                            width: MediaQuery.of(context).size.height * 0.15,
                             color: Colors.grey,
                           ),
                         ],
@@ -112,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   FontAwesomeIcons.google,
                                   color: Color.fromARGB(255, 74, 89, 102),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  _signInWithGoogle();
+                                },
                               ))
                         ],
                       ),
@@ -146,5 +154,54 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ))),
     );
+  }
+
+  void _signIn() async {
+    setState(() {
+      _isSigning = true;
+    });
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigning = false;
+    });
+    if (user != null) {
+      showToast(message: 'Se inició sesión correctamente');
+      final home = MaterialPageRoute(builder: (context) {
+        return const HomeScreen();
+      });
+      Navigator.push(context, home);
+    } else {
+      showToast(message: 'Hubo un problema al iniciar sesión');
+    }
+  }
+
+  _signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+            idToken: googleSignInAuthentication.idToken,
+            accessToken: googleSignInAuthentication.accessToken);
+
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        final home = MaterialPageRoute(builder: (context) {
+          return const HomeScreen();
+        });
+        Navigator.push(context, home);
+      }
+    } catch (e) {
+      showToast(message: 'Ha ocurrido un problema');
+    }
   }
 }

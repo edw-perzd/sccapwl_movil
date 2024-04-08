@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,6 +6,7 @@ import 'package:sccapwl_movil/screens/devices_screen.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/screens/tanks_screen.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
+import 'package:sccapwl_movil/widgets/toast.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -127,10 +129,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: AppTheme.lightTheme.textTheme.bodyMedium,
                       ),
                       onTap: () {
+                        FirebaseAuth.instance.signOut();
                         final rutaTanks = MaterialPageRoute(builder: (context) {
                           return const LoginScreen();
                         });
                         Navigator.push(context, rutaTanks);
+                        showToast(message: 'Se cerró sesión');
                       },
                     ),
                     const Divider(),

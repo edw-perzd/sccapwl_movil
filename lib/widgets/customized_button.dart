@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sccapwl_movil/themes/app_theme.dart';
 
 class CustomizedButton extends StatelessWidget {
+  final bool stateProcess;
   final String? buttonText;
   final Color? buttonColor;
   final Color? textColor;
@@ -10,7 +12,8 @@ class CustomizedButton extends StatelessWidget {
       this.buttonText,
       this.buttonColor,
       this.onPressed,
-      this.textColor});
+      this.textColor,
+      required this.stateProcess});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +27,15 @@ class CustomizedButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: buttonColor, borderRadius: BorderRadius.circular(10)),
           child: Center(
-            child: Text(
-              buttonText!,
-              style: TextStyle(color: textColor, fontSize: 25),
-            ),
+            child: stateProcess
+                ? const CircularProgressIndicator(
+                    color: AppTheme.mainColor,
+                    backgroundColor: AppTheme.backColor,
+                  )
+                : Text(
+                    buttonText!,
+                    style: TextStyle(color: textColor, fontSize: 25),
+                  ),
           ),
         ),
       ),
