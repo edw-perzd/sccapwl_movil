@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sccapwl_movil/screens/connect_bluetooth.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/screens/tanks_screen.dart';
@@ -146,11 +147,26 @@ class _DevicesScreenState extends State<DevicesScreen> {
             )),
       ),
       appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Mis dispositivos',
-            style: AppTheme.lightTheme.textTheme.headlineSmall,
-          )),
+        backgroundColor: AppTheme.mainColor,
+        centerTitle: true,
+        title: Text(
+          'Mis dispositivos',
+          style: AppTheme.lightTheme.textTheme.headlineSmall,
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                final rutaAddDevice = MaterialPageRoute(builder: (context) {
+                  return const ConnectBluetooth();
+                });
+                Navigator.push(context, rutaAddDevice);
+              },
+              icon: IconTheme(
+                data: AppTheme.lightTheme.iconTheme,
+                child: const Icon(Icons.add),
+              ))
+        ],
+      ),
       body: Container(
         padding: const EdgeInsets.all(10),
         child: FutureBuilder(

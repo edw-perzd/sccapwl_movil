@@ -153,6 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ))),
         appBar: AppBar(
+          backgroundColor: AppTheme.mainColor,
           centerTitle: true,
           title: DropdownButton(
             value: dropdownValue,

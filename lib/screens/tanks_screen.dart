@@ -144,6 +144,7 @@ class _TanksScreenState extends State<TanksScreen> {
                 ],
               ))),
       appBar: AppBar(
+        backgroundColor: AppTheme.mainColor,
         centerTitle: true,
         title: Text(
           'Mis depósitos',
