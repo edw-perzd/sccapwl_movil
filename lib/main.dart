@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 // Importaciones de Firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sccapwl_movil/screens/connect_bluetooth.dart';
+import 'package:sccapwl_movil/screens/deposit_content.dart';
+import 'package:sccapwl_movil/screens/edit_profile.dart';
 import 'package:sccapwl_movil/screens/welcome_screen.dart';
 import 'firebase_options.dart';
 
