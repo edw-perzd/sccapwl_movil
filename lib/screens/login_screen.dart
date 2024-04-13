@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sccapwl_movil/models/Users.dart';
 import 'package:sccapwl_movil/screens/forgot_password.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/signup_screen.dart';
 import 'package:sccapwl_movil/services/firebase_auth.dart';
+import 'package:sccapwl_movil/services/firebase_services.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:sccapwl_movil/widgets/customized_button.dart';
 import 'package:sccapwl_movil/widgets/customized_textfield.dart';
@@ -169,9 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
       _isSigning = false;
     });
     if (user != null) {
+      Users userActual = Users(id: user.uid, email: email);
       showToast(message: 'Se inició sesión correctamente');
       final home = MaterialPageRoute(builder: (context) {
-        return const HomeScreen();
+        return HomeScreen(userActual: userActual);
       });
       Navigator.push(context, home);
     } else {
@@ -195,8 +198,15 @@ class _LoginScreenState extends State<LoginScreen> {
             accessToken: googleSignInAuthentication.accessToken);
 
         await FirebaseAuth.instance.signInWithCredential(credential);
+
+        User? user = FirebaseAuth.instance.currentUser;
+
+        registerUser(user!.email, user.email, user.uid);
+        Users userActual =
+            Users(id: user.uid, nombreUsuario: user.email, email: user.email!);
+
         final home = MaterialPageRoute(builder: (context) {
-          return const HomeScreen();
+          return HomeScreen(userActual: userActual);
         });
         Navigator.push(context, home);
       }

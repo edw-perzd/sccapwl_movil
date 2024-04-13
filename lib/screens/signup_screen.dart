@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sccapwl_movil/models/Users.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/services/firebase_auth.dart';
+import 'package:sccapwl_movil/services/firebase_services.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:sccapwl_movil/widgets/customized_button.dart';
 import 'package:sccapwl_movil/widgets/customized_textfield.dart';
@@ -102,17 +103,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
-    setState(() {
-      isSigningUp = false;
-    });
-    if (user != null) {
-      showToast(message: 'Usuario registrado correctamente');
-      final home = MaterialPageRoute(builder: (context) {
-        return const HomeScreen();
+    if (username != '') {
+      User? user = await _auth.signUpWithEmailAndPassword(email, password);
+      setState(() {
+        isSigningUp = false;
       });
-      Navigator.push(context, home);
-      showToast(message: 'Usuario creado correctamente');
+      if (user != null) {
+        registerUser(username, email, user.uid);
+        Users userActual =
+            Users(id: user.uid, nombreUsuario: username, email: email);
+        showToast(message: 'Usuario registrado correctamente');
+        final home = MaterialPageRoute(builder: (context) {
+          return HomeScreen(userActual: userActual);
+        });
+        Navigator.push(context, home);
+        showToast(message: 'Usuario creado correctamente');
+      } else {
+        showToast(message: 'Ha ocurrido un error. Intenta de nuevo');
+        setState(() {
+          isSigningUp = false;
+        });
+      }
+    } else {
+      showToast(message: 'Ingresa un nombre de mínimo 4 caracteres');
+      setState(() {
+        isSigningUp = false;
+      });
     }
   }
 }

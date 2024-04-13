@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sccapwl_movil/models/Users.dart';
 import 'package:sccapwl_movil/screens/devices_screen.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/themes/app_theme.dart';
+import 'package:sccapwl_movil/widgets/toast.dart';
 
 class TanksScreen extends StatefulWidget {
-  const TanksScreen({super.key});
+  final Users userActual;
+  const TanksScreen({super.key, required this.userActual});
 
   @override
   State<TanksScreen> createState() => _TanksScreenState();
@@ -28,26 +32,17 @@ class _TanksScreenState extends State<TanksScreen> {
                                 color: AppTheme.darkColor, size: 25),
                             child: Icon(Icons.person))),
                     title: Text(
-                      'Yahir Durán',
+                      widget.userActual.nombreUsuario ??
+                          widget.userActual.email,
                       style: AppTheme.lightTheme.textTheme.titleSmall,
                     ),
                     onTap: () {},
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   children:z [
-                  //     IconTheme(
-                  //       data: AppTheme.lightTheme.iconTheme,
-                  //       child: const Icon(Icons.person),
-                  //     ),
-                  //     Text(
-                  //       'Fulanito de tal',
-                  //       style: AppTheme.lightTheme.textTheme.headlineLarge,
-                  //     )
-                  //   ],
-                  // ),
                   const Divider(),
                   ListTile(
+                    selected: true,
+                    selectedTileColor: AppTheme.mediumColorTrans,
+                    // selectedColor: AppTheme.mediumColor,
                     leading: const IconTheme(
                         data: IconThemeData(
                             color: AppTheme.mediumColor, size: 25),
@@ -58,7 +53,7 @@ class _TanksScreenState extends State<TanksScreen> {
                     ),
                     onTap: () {
                       final rutaHome = MaterialPageRoute(builder: (context) {
-                        return const HomeScreen();
+                        return HomeScreen(userActual: widget.userActual);
                       });
                       Navigator.push(context, rutaHome);
                     },
@@ -74,15 +69,12 @@ class _TanksScreenState extends State<TanksScreen> {
                     ),
                     onTap: () {
                       final rutaDevices = MaterialPageRoute(builder: (context) {
-                        return const DevicesScreen();
+                        return DevicesScreen(userActual: widget.userActual);
                       });
                       Navigator.push(context, rutaDevices);
                     },
                   ),
                   ListTile(
-                    selected: true,
-                    selectedTileColor: AppTheme.mediumColorTrans,
-                    // selectedColor: AppTheme.mediumColor,
                     leading: const IconTheme(
                         data: IconThemeData(
                             color: AppTheme.mediumColor, size: 25),
@@ -93,7 +85,9 @@ class _TanksScreenState extends State<TanksScreen> {
                     ),
                     onTap: () {
                       final rutaTanks = MaterialPageRoute(builder: (context) {
-                        return const TanksScreen();
+                        return TanksScreen(
+                          userActual: widget.userActual,
+                        );
                       });
                       Navigator.push(context, rutaTanks);
                     },
@@ -122,10 +116,13 @@ class _TanksScreenState extends State<TanksScreen> {
                       style: AppTheme.lightTheme.textTheme.bodyMedium,
                     ),
                     onTap: () {
+                      FirebaseAuth.instance.signOut();
                       final rutaTanks = MaterialPageRoute(builder: (context) {
                         return const LoginScreen();
                       });
                       Navigator.push(context, rutaTanks);
+                      widget.userActual.deleteUser();
+                      showToast(message: 'Se cerró sesión');
                     },
                   ),
                   const Divider(),
