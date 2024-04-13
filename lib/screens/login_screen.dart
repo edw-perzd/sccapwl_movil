@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     CustomizedTextfield(
                       myController: _passwordController,
-                      hintText: "Ingresa tu contraseña",
+                      hintText: "Ingresa tu contraseña ",
                       isPassword: true,
                     ),
                     Align(
