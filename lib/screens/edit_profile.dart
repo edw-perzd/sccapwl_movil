@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  const EditProfile({super.key});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -11,18 +11,34 @@ class _EditProfileState extends State<EditProfile> {
   bool isObscurePassword = true;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+  late TextEditingController _usernameController;
+  late TextEditingController _phoneController;
+  late TextEditingController _FirstsureNameController;
+  late TextEditingController _SecondsureNameController;
+  late TextEditingController _ageController;
 
   @override
   void initState() {
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _usernameController = TextEditingController();
+    _phoneController = TextEditingController();
+    _ageController = TextEditingController();
+    _FirstsureNameController = TextEditingController();
+    _SecondsureNameController = TextEditingController();
+    
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
+    _phoneController.dispose();
+    _ageController.dispose();
+    _FirstsureNameController.dispose();
+    _SecondsureNameController.dispose();
     super.dispose();
   }
 
@@ -98,13 +114,13 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               SizedBox(height: 30),
-              buildTextField("Nombres", "Demon", false, TextInputType.text),
-              buildTextField("Apellido paterno", "Hernandez", false, TextInputType.text),
-              buildTextField("Apellido materno", "Lopez", false, TextInputType.text),
-              buildTextField("Edad", "17", false, TextInputType.number),
+              buildTextField("Nombres", "Demon", false, TextInputType.text, _usernameController ),
+              buildTextField("Apellido paterno", "Hernandez", false, TextInputType.text, _FirstsureNameController),
+              buildTextField("Apellido materno", "Lopez", false, TextInputType.text, _SecondsureNameController),
+              buildTextField("Edad", "17", false, TextInputType.number, _ageController),
               buildTextField("Contraseña", "*********", true, TextInputType.text, _passwordController),
               buildTextField("Correo", "demo@example", false, TextInputType.emailAddress, _emailController),
-              buildTextField("Numero telefonico", "276118....", false, TextInputType.phone),
+              buildTextField("Numero telefonico", "276118....", false, TextInputType.phone, _phoneController),
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

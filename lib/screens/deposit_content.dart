@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DepositContent extends StatefulWidget {
-  const DepositContent({Key? key}) : super(key: key);
+  const DepositContent({super.key});
+
 
   @override
   State<DepositContent> createState() => _DepositContentState();
