@@ -45,7 +45,7 @@ class _DepositContentState extends State<DepositContent> {
                         color: Colors.blue[
                             900]!), // Color del borde cuando no está enfocado
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors
                             .blueAccent), // Color del borde cuando está enfocado
@@ -61,7 +61,7 @@ class _DepositContentState extends State<DepositContent> {
                   _depositName = value!;
                 },
               ),
-              SizedBox(height: 10), // Espacio entre los campos
+              const SizedBox(height: 10), // Espacio entre los campos
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Altura (cm)',
@@ -72,7 +72,7 @@ class _DepositContentState extends State<DepositContent> {
                         color: Colors.blue[
                             900]!), // Color del borde cuando no está enfocado
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors
                             .blueAccent), // Color del borde cuando está enfocado
@@ -89,7 +89,7 @@ class _DepositContentState extends State<DepositContent> {
                   _height = double.parse(value!);
                 },
               ),
-              SizedBox(height: 10), // Espacio entre los campos
+              const SizedBox(height: 10), // Espacio entre los campos
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Tipo del Depósito',
@@ -100,7 +100,7 @@ class _DepositContentState extends State<DepositContent> {
                         color: Colors.blue[
                             900]!), // Color del borde cuando no está enfocado
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors
                             .blueAccent), // Color del borde cuando está enfocado
@@ -116,7 +116,7 @@ class _DepositContentState extends State<DepositContent> {
                   _depositType = value!;
                 },
               ),
-              SizedBox(height: 10), // Espacio entre los campos
+              const SizedBox(height: 10), // Espacio entre los campos
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Ancho (cm)',
@@ -127,7 +127,7 @@ class _DepositContentState extends State<DepositContent> {
                         color: Colors.blue[
                             900]!), // Color del borde cuando no está enfocado
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors
                             .blueAccent), // Color del borde cuando está enfocado
@@ -144,7 +144,7 @@ class _DepositContentState extends State<DepositContent> {
                   _width = double.parse(value!);
                 },
               ),
-              SizedBox(height: 10), // Espacio entre los campos
+              const SizedBox(height: 10), // Espacio entre los campos
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Largo (cm)',
@@ -155,7 +155,7 @@ class _DepositContentState extends State<DepositContent> {
                         color: Colors.blue[
                             900]!), // Color del borde cuando no está enfocado
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors
                             .blueAccent), // Color del borde cuando está enfocado
@@ -172,7 +172,7 @@ class _DepositContentState extends State<DepositContent> {
                   _length = double.parse(value!);
                 },
               ),
-              SizedBox(height: 10), // Espacio entre los campos
+              const SizedBox(height: 10), // Espacio entre los campos
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Codigo del dispositivo a vincular',
@@ -183,7 +183,7 @@ class _DepositContentState extends State<DepositContent> {
                         color: Colors.blue[
                             900]!), // Color del borde cuando no está enfocado
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                         color: Colors
                             .blueAccent), // Color del borde cuando está enfocado
@@ -199,17 +199,11 @@ class _DepositContentState extends State<DepositContent> {
                   _deviceCode = value!;
                 },
               ),
-              SizedBox(height: 20), // Espacio entre el botón y los campos
+              const SizedBox(height: 20), // Espacio entre el botón y los campos
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-
-                    print('Nombre del Depósito: $_depositName');
-                    print('Altura: $_height');
-                    print('Tipo del Depósito: $_depositType');
-                    print('Ancho: $_width');
-                    print('Largo: $_length');
 
                     final depositos = await getDepositos(_deviceCode);
 

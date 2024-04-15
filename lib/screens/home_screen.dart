@@ -1,7 +1,6 @@
+// Importación de paquetes necesarios
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:sccapwl_movil/models/Users.dart';
 import 'package:sccapwl_movil/screens/devices_screen.dart';
 import 'package:sccapwl_movil/screens/edit_profile.dart';
@@ -12,25 +11,37 @@ import 'package:sccapwl_movil/themes/app_theme.dart';
 import 'package:sccapwl_movil/widgets/toast.dart';
 import 'package:weather_icons/weather_icons.dart';
 
+// Definición del widget HomeScreen
 class HomeScreen extends StatefulWidget {
-  final Users userActual;
-  const HomeScreen({super.key, required this.userActual});
+  final Users userActual; // Usuario actual
+  const HomeScreen({super.key, required this.userActual}); // Constructor
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() =>
+      _HomeScreenState(); // Método para crear el estado del widget
 }
 
+// Estado del widget HomeScreen
 class _HomeScreenState extends State<HomeScreen> {
-  String dropdownValue = '0';
+  String dropdownValue = '0'; // Valor seleccionado en el menú desplegable
+
+// Método para construir la interfaz de usuario
   @override
   Widget build(BuildContext context) {
-    widget.userActual.getUserData();
+    widget.userActual.getUserData(); // Obtener los datos del usuario
+
+    // Estructura de la pantalla
     return Scaffold(
+        // Menú lateral
         drawer: Drawer(
             child: Container(
                 padding: const EdgeInsets.all(30.0),
                 child: Column(
                   children: [
+                    // Lista de elementos del menú
+                    // Cada elemento del menú es un ListTile que representa una opción
+                    // al ser seleccionada por el usuario
+                    // Al seleccionar un elemento, se muestra la pantalla correspondiente
                     ListTile(
                       leading: IconTheme(
                           data: AppTheme.lightTheme.iconTheme,
@@ -140,15 +151,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         })
                   ],
                 ))),
+
+        // Barra superior de la pantalla
         appBar: AppBar(
-            backgroundColor: AppTheme.mainColor,
-            centerTitle: true,
+            backgroundColor: AppTheme.mainColor, // Color de fondo
+            centerTitle: true, // Centrar el título
             title: StreamBuilder(
+
+                // Construye un widget en base a un stream de datos
                 stream: firebaseInstance
                     .collection('dispositivos')
                     .where('id_usuario', isEqualTo: widget.userActual.id)
-                    .snapshots(),
+                    .snapshots(), // Obtiene los dispositivos vinculados al usuario
                 builder: (context, snapshot) {
+                  // Construye el widget en base al snapshot recibido
+                  // Este widget es un menú desplegable que muestra los dispositivos vinculados al usuario
                   List<DropdownMenuItem> devicesItems = [];
                   if (!snapshot.hasData) {
                     devicesItems.add(DropdownMenuItem(
@@ -186,13 +203,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     value: dropdownValue,
                   );
                 })),
+
+        // Cuerpo de la pantalla
         body: dropdownValue != '0'
             ? StreamBuilder(
+                // Construye un widget en base a un stream de datos
                 stream: firebaseInstance
                     .collection('depositos')
                     .where('id_dispositivo', isEqualTo: dropdownValue)
-                    .snapshots(),
+                    .snapshots(), // Obtiene los datos del depósito seleccionado
                 builder: (context, AsyncSnapshot snapshot) {
+                  // Construye el widget en base al snapshot recibido
+                  // Este widget muestra la información del depósito seleccionado
                   String nombre_deposito = '';
                   double nivelTDS = 0.0;
                   double nivelTemp = 0.0;
@@ -497,6 +519,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               )
             : const Center(
+                // Si no se ha seleccionado un dispositivo, muestra un mensaje en el centro de la pantalla
                 child: Text('Selecciona un dispositivo'),
               ));
   }
