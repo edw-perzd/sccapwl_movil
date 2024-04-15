@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sccapwl_movil/models/Users.dart';
 import 'package:sccapwl_movil/screens/devices_screen.dart';
+import 'package:sccapwl_movil/screens/edit_profile.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/screens/tanks_screen.dart';
 import 'package:sccapwl_movil/services/firebase_services.dart';
@@ -43,7 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             widget.userActual.email,
                         style: AppTheme.lightTheme.textTheme.titleSmall,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        final rutaProfile =
+                            MaterialPageRoute(builder: (context) {
+                          return EditProfile(userActual: widget.userActual);
+                        });
+                        Navigator.push(context, rutaProfile);
+                      },
                     ),
                     const Divider(),
                     ListTile(
@@ -98,19 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         });
                         Navigator.push(context, rutaTanks);
-                      },
-                    ),
-                    ListTile(
-                      leading: const IconTheme(
-                          data: IconThemeData(
-                              color: AppTheme.mediumColor, size: 25),
-                          child: Icon(Icons.receipt)),
-                      title: Text(
-                        'Informes',
-                        style: AppTheme.lightTheme.textTheme.bodyMedium,
-                      ),
-                      onTap: () {
-                        null;
                       },
                     ),
                     const Divider(),
@@ -246,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ancho = double.parse(
                         docDeposito['ancho_deposito'].toStringAsFixed(2));
 
-                    cantMax = (largo * ancho * alto) * 1000;
+                    cantMax = (largo * ancho * alto) * 0.001;
                   }
                   return ListView(
                     children: [

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sccapwl_movil/models/Users.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  final Users userActual;
+  const EditProfile({super.key, required this.userActual});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -59,25 +61,6 @@ class _EditProfileState extends State<EditProfile> {
               Center(
                 child: Stack(
                   children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: Colors.black.withOpacity(0.1),
-                          ),
-                        ],
-                        shape: BoxShape.circle,
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://cdn.pixabay.com/photo/2019/09/14/22/17/man-4477027_1280.jpg')),
-                      ),
-                    ),
                     Positioned(
                       bottom: 0,
                       right: 0,
@@ -97,42 +80,47 @@ class _EditProfileState extends State<EditProfile> {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               buildTextField("Nombres", "Demon", false, TextInputType.text),
-              buildTextField("Apellido paterno", "Hernandez", false, TextInputType.text),
-              buildTextField("Apellido materno", "Lopez", false, TextInputType.text),
+              buildTextField(
+                  "Apellido paterno", "Hernandez", false, TextInputType.text),
+              buildTextField(
+                  "Apellido materno", "Lopez", false, TextInputType.text),
               buildTextField("Edad", "17", false, TextInputType.number),
-              buildTextField("Contraseña", "*********", true, TextInputType.text, _passwordController),
-              buildTextField("Correo", "demo@example", false, TextInputType.emailAddress, _emailController),
-              buildTextField("Numero telefonico", "276118....", false, TextInputType.phone),
-              SizedBox(height: 30),
+              buildTextField("Contraseña", "*********", true,
+                  TextInputType.text, _passwordController),
+              buildTextField("Correo", "demo@example", false,
+                  TextInputType.emailAddress, _emailController),
+              buildTextField("Numero telefonico", "276118....", false,
+                  TextInputType.phone),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
                     onPressed: () {},
-                    child: Text('CANCELAR',
-                        style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.black)),
                     style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('GUARDAR',
+                    child: const Text('CANCELAR',
                         style: TextStyle(
                             fontSize: 15,
                             letterSpacing: 2,
-                            color: Colors.white)),
+                            color: Colors.black)),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         padding: EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
+                    child: const Text('GUARDAR',
+                        style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.white)),
                   )
                 ],
               )
@@ -143,7 +131,9 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  Widget buildTextField(String labelText, String placeholder, bool isPasswordTextField, TextInputType keyboardType, [TextEditingController? controller]) {
+  Widget buildTextField(String labelText, String placeholder,
+      bool isPasswordTextField, TextInputType keyboardType,
+      [TextEditingController? controller]) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: TextField(
@@ -166,9 +156,7 @@ class _EditProfileState extends State<EditProfile> {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey)),
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)),
       ),
     );
   }

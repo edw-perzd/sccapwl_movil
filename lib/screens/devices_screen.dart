@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sccapwl_movil/models/Users.dart';
-import 'package:sccapwl_movil/screens/connect_bluetooth.dart';
+import 'package:sccapwl_movil/screens/form_device.dart';
 import 'package:sccapwl_movil/screens/home_screen.dart';
 import 'package:sccapwl_movil/screens/login_screen.dart';
 import 'package:sccapwl_movil/screens/tanks_screen.dart';
@@ -94,19 +94,6 @@ class _DevicesScreenState extends State<DevicesScreen> {
                       Navigator.push(context, rutaTanks);
                     },
                   ),
-                  ListTile(
-                    leading: const IconTheme(
-                        data: IconThemeData(
-                            color: AppTheme.mediumColor, size: 25),
-                        child: Icon(Icons.receipt)),
-                    title: Text(
-                      'Informes',
-                      style: AppTheme.lightTheme.textTheme.bodyMedium,
-                    ),
-                    onTap: () {
-                      null;
-                    },
-                  ),
                   const Divider(),
                   ListTile(
                     leading: const IconTheme(
@@ -153,7 +140,9 @@ class _DevicesScreenState extends State<DevicesScreen> {
           IconButton(
               onPressed: () {
                 final rutaAddDevice = MaterialPageRoute(builder: (context) {
-                  return const ConnectBluetooth();
+                  return FormDevice(
+                    userActual: widget.userActual,
+                  );
                 });
                 Navigator.push(context, rutaAddDevice);
               },
@@ -185,118 +174,11 @@ class _DevicesScreenState extends State<DevicesScreen> {
                             snapshot.data[index]['nombre_dispositivo'],
                             style: AppTheme.lightTheme.textTheme.bodyLarge,
                           ),
-                          subtitle: Row(
-                            children: [
-                              Text(
-                                'Estado: ',
-                                style: AppTheme.lightTheme.textTheme.bodySmall,
-                              ),
-                              Text(
-                                snapshot.data?[index]['estado_dispositivo'] ==
-                                        true
-                                    ? 'Encendido'
-                                    : 'Apagado',
-                                style: snapshot.data[index]
-                                            ['estado_dispositivo'] ==
-                                        true
-                                    ? const TextStyle(color: Colors.green)
-                                    : const TextStyle(color: Colors.red),
-                              )
-                            ],
-                          ),
                         ),
                         const Divider()
                       ],
                     );
                   },
-                  // children: [
-                  //   Container(
-                  //     // margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                  //     padding: const EdgeInsets.all(10),
-                  //     // decoration: BoxDecoration(
-                  //     //     color: AppTheme.backColor,
-                  //     //     borderRadius: BorderRadius.circular(10)),
-                  //     child: ListTile(
-                  //       leading: IconTheme(
-                  //           data: AppTheme.lightTheme.iconTheme,
-                  //           child: const Icon(Icons.settings_remote)),
-                  //       title: Text(
-                  //         'Dispositivo 1',
-                  //         style: AppTheme.lightTheme.textTheme.headlineMedium,
-                  //       ),
-                  //       subtitle: Row(
-                  //         children: [
-                  //           Text(
-                  //             'Estado: ',
-                  //             style: AppTheme.lightTheme.textTheme.bodySmall,
-                  //           ),
-                  //           const Text(
-                  //             'Encendido',
-                  //             style: TextStyle(color: Colors.green),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   const Divider(),
-                  //   Container(
-                  //     // margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                  //     padding: const EdgeInsets.all(10),
-                  //     // decoration: BoxDecoration(
-                  //     //     color: AppTheme.backColor,
-                  //     //     borderRadius: BorderRadius.circular(10)),
-                  //     child: ListTile(
-                  //       leading: IconTheme(
-                  //           data: AppTheme.lightTheme.iconTheme,
-                  //           child: const Icon(Icons.settings_remote)),
-                  //       title: Text(
-                  //         'Dispositivo 2',
-                  //         style: AppTheme.lightTheme.textTheme.headlineMedium,
-                  //       ),
-                  //       subtitle: Row(
-                  //         children: [
-                  //           Text(
-                  //             'Estado: ',
-                  //             style: AppTheme.lightTheme.textTheme.bodySmall,
-                  //           ),
-                  //           const Text(
-                  //             'Apagado',
-                  //             style: TextStyle(color: Colors.red),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   const Divider(),
-                  //   Container(
-                  //     // margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                  //     padding: const EdgeInsets.all(10),
-                  //     // decoration: BoxDecoration(
-                  //     //     color: AppTheme.backColor,
-                  //     //     borderRadius: BorderRadius.circular(10)),
-                  //     child: ListTile(
-                  //       leading: IconTheme(
-                  //           data: AppTheme.lightTheme.iconTheme,
-                  //           child: const Icon(Icons.settings_remote)),
-                  //       title: Text(
-                  //         'Dispositivo 3',
-                  //         style: AppTheme.lightTheme.textTheme.headlineMedium,
-                  //       ),
-                  //       subtitle: Row(
-                  //         children: [
-                  //           Text(
-                  //             'Estado: ',
-                  //             style: AppTheme.lightTheme.textTheme.bodySmall,
-                  //           ),
-                  //           const Text(
-                  //             'Encendido',
-                  //             style: TextStyle(color: Colors.green),
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ],
                 );
               } else {
                 return const Center(
